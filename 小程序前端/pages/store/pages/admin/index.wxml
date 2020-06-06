@@ -1,0 +1,84 @@
+<view wx:if="{{detail&&detail.black!='0'}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">你的账户存在异常，如有问题请致电客服</view>
+        <view class="margin-tb text-center"></view>
+    </view>
+</view>
+<view wx:elif="{{detail&&detail.status==2}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">你的店铺审核未通过，如有问题请致电客服</view>
+        <view class="margin-tb text-center"></view>
+    </view>
+</view>
+<view wx:elif="{{detail&&detail.status==0}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">你的店铺正在审核中，如有问题请致电客服</view>
+        <view class="margin-tb text-center"></view>
+    </view>
+</view>
+<view wx:else>
+    <view class="cu-list menu card-menu   shadow margin-top">
+        <view class="userinfo2 ">
+            <view class="userinfo-avatar">
+                <open-data type="userAvatarUrl"></open-data>
+            </view>
+            <view style="width:80%">
+                <view class=" text-bold text-df margin-left ">
+                    <open-data type="userNickName"></open-data>
+                    <text bindtap="jumpBase" class="cuIcon-settings text-gray fr text-xl text-center" style="width:80rpx;heigth:80rpx;text-align:center;	font-size: 40rpx;"></text>
+                </view>
+                <view class="margin-top margin-left">余额：￥{{detail.money?detail.money:0}}
+          <button bindtap="cash" class="cu-btn margin-left-sm sm bg-blue text-white">提现</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-list menu card-menu shadow margin-top">
+        <view class="cu-bar solid-bottom" style=" min-height:80rpx;background:#fff">
+            <view class="action">
+        常用
+      </view>
+        </view>
+        <view class="cu-list grid col-3 no-border ">
+            <view bindtap="goUrl" class="cu-item text-ox" data-url="/pages/store/pages/ordertaking/index">
+                <view class="cuIcon-punch"></view>
+                <text>接单大厅</text>
+            </view>
+            <view bindtap="goUrl" class="cu-item text-ox" data-url="/pages/store/pages/order/index">
+                <view class="cuIcon-form"></view>
+                <text>订单管理</text>
+            </view>
+            <view bindtap="goUrl" class="cu-item text-ox" data-url="/pages/store/pages/uxuan/index" wx:if="{{detail.uxuan==1}}">
+                <view class="cuIcon-vip"></view>
+                <text>优选订单</text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-list menu card-menu shadow margin-top">
+        <view class="cu-bar solid-bottom" style=" min-height:80rpx;background:#fff">
+            <view class="action">
+        设置
+      </view>
+        </view>
+        <view class="cu-list grid col-3 no-border ">
+            <view bindtap="goUrl" class="cu-item text-ox" data-url="/pages/me/money/index?id=0">
+                <view class="cuIcon-pay"></view>
+                <text>资金记录</text>
+            </view>
+            <view bindtap="goUrl" class="cu-item text-ox" data-url="/pages/idcard/index">
+                <view class="cuIcon-profile">
+                    <view class="cu-tag badge" wx:if="{{idcard&&idcard.status!=1}}">
+                        <block wx:if="{{idcard.status==2}}">未通过</block>
+                        <block wx:if="{{idcard.status==0}}">审核中</block>
+                        <block wx:if="{{!idcard}}">审核中</block>
+                    </view>
+                    <view class="cu-tag badge" wx:if="{{!idcard}}">去认证</view>
+                </view>
+                <text>实名认证</text>
+            </view>
+        </view>
+    </view>
+</view>

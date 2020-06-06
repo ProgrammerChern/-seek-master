@@ -1,0 +1,96 @@
+<view wx:if="{{detail&&detail.status=='0'}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">正在审核中，请耐心等待</view>
+        <view class="margin-tb text-center"></view>
+    </view>
+</view>
+<view wx:else>
+    <view wx:if="{{detail&&detail.black>0}}">
+        <view class="zanwushuju_border">
+            <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+            <view class="zanwushuju_border_title">你的账户存在异常，如有问题请致电客服</view>
+            <view class="margin-tb text-center"></view>
+        </view>
+    </view>
+    <form bindsubmit="formSubmit" class="" wx:else>
+        <view class="cu-bar solid-top bg-yellow light padding-sm" style="height:72rpx;" wx:if="{{detail&&detail.status==2}}">
+            <view class="action">
+                <text class="icon-info text-yellow"></text>{{detail.reject}}
+      </view>
+        </view>
+        <view class="bg-white cu-card case margin-sm radius">
+            <view class="cu-form-group">
+                <view class="title">姓名:</view>
+                <input class="radius" name="name" placeholder="" value="{{detail.name}}"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">年龄:</view>
+                <input class="radius" name="age" placeholder="" type="number" value="{{detail.age}}"></input>
+            </view>
+            <radio-group bindchange="sexChange" class="form-group top solid-top solid-bottom" style="width:100%">
+                <view class="cu-form-group ">
+                    <view class="title">性别:</view>
+          男
+          <radio checked="{{detail.sex==1?true:false}}" class="blue" value="1"></radio>
+          女
+          <radio checked="{{detail.sex==2?true:false}}" class="blue margin-left-sm" value="2"></radio>
+                </view>
+            </radio-group>
+            <view class="cu-form-group">
+                <view class="title">联系方式：</view>
+                <input class="radius" name="phone" placeholder="" type="number" value="{{phone?phone:detail.phone}}"></input>
+                <button bindgetphonenumber="getPhoneNumber" class="cu-btn line-blue sm" openType="getPhoneNumber">获取电话</button>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">联系地址：</view>
+                <input class="radius" disabled="true" name="address" placeholder="" value="{{address}}"></input>
+                <button bindtap="tomap" class="cu-btn line-blue sm">获取地址</button>
+            </view>
+            <view class="cu-form-group align-start solid-top">
+                <view class="title">个人描述：</view>
+                <textarea maxlength="-1" name="detail" placeholder="" placeholderClass="placeholder" value="{{detail.detail}}"></textarea>
+            </view>
+        </view>
+        <view class="padding-left ">
+            <view class="text-left">选择技能类型</view>
+        </view>
+        <view class="bg-white cu-card case margin-sm radius">
+            <view class="cu-list grid col-4 no-border">
+                <view bindtap="typeselect" class="cu-item" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{typeall}}">
+                    <view>
+                        <image src="{{item.img}}"></image>
+                    </view>
+                    <text class="">{{item.name}}</text>
+                    <view class="ox_bg" wx:if="{{item.xuanzhong}}">
+                        <image src="/pages/images/duihao.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="padding-left">
+            <view class="text-left">上传本人照片，有利于快速审核</view>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm radius">
+            <view class="grid col-3 grid-square flex-sub padding-sm">
+                <view class="padding-xs bg-img" style="background-image:url({{item.all}});" wx:for="{{imgList}}" wx:key="{{index}}">
+                    <view bindtap="deleteImg" class="cu-tag bg-red" data-id="{{index}}">
+                        <text class="cuIcon-close" style="margin-top: 40rpx;"></text>
+                    </view>
+                </view>
+                <view bindtap="uplaod" class="padding-xs solids" wx:if="{{imgList.length<6}}">
+                    <text class="cuIcon-cameraadd" wx:if="{{loading}}"></text>
+                    <text class="cuIcon-loading2 cuIconfont-spin" wx:else></text>
+                </view>
+            </view>
+        </view>
+        <view class="padding flex flex-direction">
+            <input class="radius" hidden="true" name="id" placeholder="" value="{{detail.id}}"></input>
+            <button class="cu-btn block bg-blue margin-tb-sm lg" formType="submit" wx:if="{{!detail}}">立即入驻</button>
+            <button class="cu-btn block bg-blue margin-tb-sm lg" formType="submit" wx:if="{{detail.status==1}}">保存修改</button>
+            <button class="cu-btn block bg-blue margin-tb-sm lg" formType="submit" wx:if="{{detail.status==2}}">重新入驻</button>
+        </view>
+    </form>
+</view>
+<import src="/pages/template/login.wxml"></import>
+<template is="login" data="{{isShow:isShow}}"></template>

@@ -1,0 +1,307 @@
+<view class="padding-top  bg-white margin-bottom">
+    <view class="flex flex-wrap padding-bottom-sm">
+        <view class="basis-ql text-xxl text-black text-bold text-center">
+            <block wx:if="{{detail.status==0}}">
+                <text wx:if="{{repairData!=''}}">已有{{repairData.length}}位师傅接单啦~</text>
+                <text wx:else>多个师傅正在为您报价~</text>
+            </block>
+            <text wx:elif="{{detail.status==1}}">师傅正在为您服务</text>
+            <text wx:elif="{{detail.status==2}}">订单已取消</text>
+            <text wx:elif="{{detail.status==3}}">订单已完成</text>
+            <text wx:elif="{{detail.status=='4'}}">订单退款中</text>
+            <text wx:elif="{{detail.status=='5'}}">订单退款成功</text>
+        </view>
+        <button bindtap="refound" class="cu-btn  line-red  sm" data-orderid="{{detail.id}}" wx:if="{{detail.status=='3'&&detail.money>0}}">申请退款</button>
+        <!-- <view class="basis-xl text-gray text-xs padding-top-sm ">发布时间：{{detail.create_time}}</view> -->
+    </view>
+      <view class="ob-options-view">
+        <view class="ob-options-list">
+            <view bindtap="current" class="ob-options-item" data-a="0">
+            <text style="{{current==0 ? 'color:#00C87C;font-weight:600;':'' }}">师傅信息</text>
+             </view>
+        </view>
+        <view class="ob-options-list">
+            <view bindtap="current" class="ob-options-item" data-a="1">
+              <text style="{{current==1 ? 'color:#00C87C; font-weight:600;':'' }}">订单信息</text>
+             </view>
+        </view>
+
+       <view class="ob-options-bottomLine" ></view> 
+       <view   class="ob-options-indicator" style="width:150rpx;left:{{current==0 ? '112rpx':'487rpx' }}; height: 6rpx; border-radius:30rpx;background-color:#00C87C;"></view>
+    </view>
+
+</view>
+
+<view wx:if="{{current==0 }}">
+
+<view  wx:if="{{detail.status==0}}" >
+
+    <view class="qp-container" wx:if="{{repairData!=''}}">
+        <view class="body-container" >
+            <view class="content"  wx:for="{{repairData}}" wx:key="">
+                <view class="cell">
+                    <view>
+                        <text>报价：</text>
+                        <text style="font-size:34rpx;color:#FF7043;">{{item.price}}</text>
+                    </view>
+                    <view>
+                        <text>{{item.create_time}}</text>
+                    </view>
+                </view>
+                <view class="card-container" bindtap="repairInfo" data-uid="{{item.uid}}">
+                    <view class="avater"  wx:if="{{item.img_patch}}">
+                        <image src="{{item.img_patch}}"></image>
+                    </view>
+                    <view class="card-content">
+                        <view class="card-cell">
+                            <view class="realname">
+                                <text>{{item.name}}</text>
+                            </view>
+                            <view class="arrowicon">
+                                <image src="/pages/images/icon_150.png"></image>
+                            </view>
+                            <!-- <view class="icon">
+                                <view wx:if="{{item.deposit}}">
+                                    <image class="protect" src="/pages/images/protect.png"></image>
+                                    <text>{{item.deposit.amount}}</text>
+                                    <image class="aroow_r" src="/assets/icons/aroow_r@3x.png"></image>
+                                </view>
+                            </view> -->
+                        </view>
+                        <!-- <view class="card-cell">
+                            <view class="services">
+                                <text style="margin-right:10rpx;">服务<text style="color:#00C87C;">{{item.serviceCount||0}}</text>次 | </text>
+                                <text style="margin-right:10rpx;">好评率<text style="color:#00C87C;">{{(item.collectTotally.evaluations==0?100:item.collectTotally.praiseRatio)||100}}</text>%</text>
+                            </view>
+                        </view> -->
+                    </view>
+                    <view class="mobile" >
+                        <!-- <view>
+                            <image src="/pages/images/phone.png"></image>
+                        </view> -->
+                    </view>
+                    
+                </view>
+                <view style="padding:0 30rpx;" wx:if="{{item.remark}}">
+                    <view class="arrow"></view>
+                    <view class="des">
+                        <text>{{item.remark}}</text>
+                    </view>
+                </view>
+                <!-- <view  wx:if="{{item.promiseList}}">
+                    <view class="promise">
+                        <view class="block" wx:for="{{item.promiseList}}" wx:for-item="itemName" wx:key="index">
+                            <image src="/pages/images/icon_180.png" wx:if="{{itemName.optionDescription=='免空跑费'||itemName.optionDescription=='空跑费29元/次'}}"></image>
+                            <image src="/pages/images/icon_184.png" wx:if="{{itemName.optionDescription=='保修1个月'||itemName.optionDescription=='保修3个月'||itemName.optionDescription=='保修6个月'}}"></image>
+                            <image src="/pages/images/icon_176.png" wx:if="{{itemName.optionDescription=='支持不满意重新服务'}}"></image>
+                            <text>{{itemName.optionDescription}} ></text>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{item.demandPromises}}">
+                    <view class="promise">
+                        <view class="block" wx:for="{{item.demandPromises}}" wx:for-item="itemName" wx:key="index">
+                            <image src="/pages/images/icon_180.png" wx:if="{{itemName.optionDescription=='免空跑费'||itemName.optionDescription=='空跑费29元/次'}}"></image>
+                            <image src="/pages/images/icon_184.png" wx:if="{{itemName.optionDescription=='保修1个月'||itemName.optionDescription=='保修3个月'||itemName.optionDescription=='保修6个月'}}"></image>
+                            <image src="/pages/images/icon_176.png" wx:if="{{itemName.optionDescription=='支持不满意重新服务'}}"></image>
+                            <text wx:if="{{itemName.optionDescription!='不支持不满意重新服务'}}">{{itemName.optionDescription}}</text>
+                        </view>
+                    </view>
+                </view> -->
+                <view style="height:2rpx;width:600rpx;margin:0 auto;background:#f9f9f9;"></view>
+                <view catchtap="selPay"  data-bid="{{item.id}}" data-orderid="{{item.order_id}}" data-price="{{item.price}}" data-rid="{{item.uid}}" class="hirebtn" hoverClass="hoverClass" >
+                    <image src="/pages/images/icon_26.png"></image>
+                    <text style="color:#00C87C;font-weight:600;">立即雇佣</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="release bg-white padding-bottom-lg" wx:else>
+        <view class="desciption">
+            <text>请关注微信通知，将会有师傅持续为您报价；</text>
+            <text><text style="color:#FF7043;">多个报价</text>，总有一个师傅适合您；</text>
+        </view>
+        <view class="useprocess">
+            <image src="https://jiating-oss.wanshifu.com/wxapp/icon/20190304/icon_190.png"></image>
+        </view>
+    </view>
+
+
+</view>
+
+<view wx:elif="{{detail.status==1||detail.status==3}}">
+
+    <view class="qp-container" >
+        <view class="body-container" >
+            <view class="content" >
+                <view class="cell">
+                    <view>
+                        <text>订单金额：</text>
+                        <text style="font-size:34rpx;color:#FF7043;">{{detail.sure_price}}</text>
+                    </view>
+                    <view>
+                        <text>{{detail.create_time}}</text>
+                    </view>
+                </view>
+                <view class="card-container">
+                    <view class="avater" bindtap="repairInfo" data-uid="{{detail.repair_uid}}" wx:if="{{detail.repair_logo}}">
+                        <image src="{{detail.repair_logo}}"></image>
+                    </view>
+                    <view class="card-content">
+                        <view class="card-cell" bindtap="repairInfo" data-uid="{{detail.repair_uid}}">
+                            <view class="realname">
+                                <text>{{detail.repair_name}}</text>
+                            </view>
+                            <view class="arrowicon">
+                                <image src="/pages/images/icon_150.png"></image>
+                            </view>
+                            <!-- <view class="icon">
+                                <view wx:if="{{item.deposit}}">
+                                    <image class="protect" src="/pages/images/protect.png"></image>
+                                    <text>{{item.deposit.amount}}</text>
+                                    <image class="aroow_r" src="/assets/icons/aroow_r@3x.png"></image>
+                                </view>
+                            </view> -->
+                        </view>
+                        <view class="card-cell" bindtap="call" data-phone="{{detail.repair_phone}}">
+                            <view class="services">
+                            <text style="color:#00C87C;">{{detail.repair_phone}}</text>
+                                <!-- <text style="margin-right:10rpx;">服务<text style="color:#00C87C;">{{item.serviceCount||0}}</text>次 | </text>
+                                <text style="margin-right:10rpx;">好评率<text style="color:#00C87C;">{{(item.collectTotally.evaluations==0?100:item.collectTotally.praiseRatio)||100}}</text>%</text> -->
+                            </view>
+                        </view>
+                    </view>
+                    <view class="mobile" bindtap="call" data-phone="{{detail.repair_phone}}">
+                        <view>
+                            <image src="/pages/images/phone.png"></image>
+                        </view>
+                    </view>
+                    
+                </view>
+                <!-- <view  wx:if="{{item.promiseList}}">
+                    <view class="promise">
+                        <view class="block" wx:for="{{item.promiseList}}" wx:for-item="itemName" wx:key="index">
+                            <image src="/pages/images/icon_180.png" wx:if="{{itemName.optionDescription=='免空跑费'||itemName.optionDescription=='空跑费29元/次'}}"></image>
+                            <image src="/pages/images/icon_184.png" wx:if="{{itemName.optionDescription=='保修1个月'||itemName.optionDescription=='保修3个月'||itemName.optionDescription=='保修6个月'}}"></image>
+                            <image src="/pages/images/icon_176.png" wx:if="{{itemName.optionDescription=='支持不满意重新服务'}}"></image>
+                            <text>{{itemName.optionDescription}} ></text>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{item.demandPromises}}">
+                    <view class="promise">
+                        <view class="block" wx:for="{{item.demandPromises}}" wx:for-item="itemName" wx:key="index">
+                            <image src="/pages/images/icon_180.png" wx:if="{{itemName.optionDescription=='免空跑费'||itemName.optionDescription=='空跑费29元/次'}}"></image>
+                            <image src="/pages/images/icon_184.png" wx:if="{{itemName.optionDescription=='保修1个月'||itemName.optionDescription=='保修3个月'||itemName.optionDescription=='保修6个月'}}"></image>
+                            <image src="/pages/images/icon_176.png" wx:if="{{itemName.optionDescription=='支持不满意重新服务'}}"></image>
+                            <text wx:if="{{itemName.optionDescription!='不支持不满意重新服务'}}">{{itemName.optionDescription}}</text>
+                        </view>
+                    </view>
+                </view> -->
+                <view style="height:2rpx;width:600rpx;margin:0 auto;background:#f9f9f9;"></view>
+                 <view catchtap="goLine"  data-orderid="{{detail.id}}" class="hirebtn" hoverClass="hoverClass" >
+                    <image src="/pages/images/icon_26.png"></image>
+                    <text style="color:#00C87C;font-weight:600;">查看进度</text>
+                </view>
+                
+            </view>
+        </view>
+    </view>
+
+
+</view>
+
+</view>
+
+<view wx:if="{{current==1}}">
+
+<view class="cu-bar bg-white solid-bottom flex ">
+    <view class="action text-black">
+        <icon class="icon-titles text-orange "></icon> 需求信息
+  </view>
+</view>
+<view class="bg-white padding-lr" >
+    <view class="basis-ql text-df padding-xs solid-bottom">
+        <view class="title">
+        服务类目：<text class="text-black"> {{detail.type_name}}</text>
+        </view>
+    </view>
+</view>
+<view class="bg-white padding-lr" wx:if="{{detail.diy !=''}}">
+<view class="basis-ql text-df padding-xs solid-bottom">
+    <view class="title" wx:if="{{detail.diy.numvalue}}">
+    {{detail.diy.num}}：<text class="text-black"> {{detail.diy.numvalue}}</text>
+    </view>
+</view>
+<view class="basis-ql text-df padding-xs solid-bottom">
+    <view class="title" wx:if="{{detail.diy.multivalue}}">
+    {{detail.diy.multi}}：<text class="text-black"> {{detail.diy.multivalue}}</text>
+    </view>
+</view>
+<view class="basis-ql text-df padding-xs solid-bottom">
+    <view class="title" wx:if="{{detail.diy.selectvalue}}">
+    {{detail.diy.select}}：<text class="text-black"> {{detail.diy.selectvalue}}</text>
+    </view>
+</view>
+<view class="basis-ql text-df padding-xs solid-bottom">
+    <view class="title" wx:if="{{detail.diy.radiovalue}}">
+    {{detail.diy.radio}}：<text class="text-black"> {{detail.diy.radiovalue}}</text>
+    </view>
+</view>
+<view class="basis-ql text-df padding-xs solid-bottom">
+        <view class="title" wx:if="{{detail.diy.tipsvalue}}">
+    {{detail.diy.tips}}：<text class="text-black"> {{detail.diy.tipsvalue}}</text>
+    </view>
+</view>
+</view>
+
+<view class="padding-lr bg-white">
+    <view class="title padding-xs">备注：</view>
+    <view class="text-left padding">{{detail.remark}}</view>
+</view>
+<view class="grid col-3 grid-square flex-sub bg-white margin-bottom padding-lr">
+    <view bindtap="preview" class="padding-xs bg-img " data-url="{{item.img_patch}}" style="background-image:url({{item.img_patch}});" wx:for="{{imgs}}" wx:key="{{index}}"></view>
+</view>
+
+<view class="padding-lr bg-white padding-bottom">
+    <view class="cu-bar bg-white solid-bottom flex ">
+        <view class="action text-black">
+            <icon class="icon-titles text-orange "></icon> 基本信息
+        </view>
+    </view>
+    <view class="flex flex-wrap">
+        <view class="basis-ql text-df padding-xs solid-bottom">
+            <view class="title">下单时间:
+                <text class="text-black"> {{detail.create_time}}</text>
+            </view>
+        </view>
+        <view class="basis-ql text-df padding-xs solid-bottom">
+            <view class="title">联系人:
+                <text class="text-black"> {{detail.name?detail.name:''}}</text>
+            </view>
+        </view>
+        <view class="basis-ql text-df padding-xs solid-bottom">
+            <view class="title">联系电话:
+        <text class="text-black"> {{detail.phone}}</text>
+            </view>
+        </view>
+        <view class="basis-ql text-df padding-xs solid-bottom">
+            <view class="title">期望上门时间:
+        <text class="text-black text-content"> {{detail.go_time}}</text>
+            </view>
+        </view>
+        <view class="basis-ql text-df padding-xs solid-bottom">
+            <view class="title">上门地址:
+        <text class="text-black text-content"> {{detail.address}}</text>
+            </view>
+        </view>
+        <view class="basis-ql text-df padding-xs ">
+            <view class="title">详细地址:
+        <text class="text-black"> {{detail.address_detail}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+
+</view>

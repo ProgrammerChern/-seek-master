@@ -1,0 +1,16 @@
+<oxnav back="1" id="oxnav" title="设计海报"></oxnav>
+<view class="cu-list menu card-menu shadow margin-top-xs">
+    <view class="image">
+        <image class="flex justify-end fl" mode="widthFix" src="{{billUrl}}" style=" width:100%" wx:if="{{billUrl}}"></image>
+        <view class="bg-white" style="height:500rpx" wx:else></view>
+        <image mode="widthFix" src="/pages/images/share_tpl3.png" style="width:100%;"></image>
+    </view>
+</view>
+<view class="cu-list menu card-menu " style="position: absolute;z-index: 9;width:92%">
+    <button bindtap="upBill" class="cu-btn block bg-blue margin-tb-sm lg">
+    替换背景（414*260）</button>
+    <button bindtap="savePhoto" class="cu-btn block bg-blue margin-tb-sm lg">
+    保存图片</button>
+</view>
+<view style="height:530px;"></view>
+<canvas canvasId="shareCanvas" style="width:414px;height:530px;opacity:0;position:fixed;"></canvas>

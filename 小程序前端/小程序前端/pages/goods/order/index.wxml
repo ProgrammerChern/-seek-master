@@ -1,0 +1,63 @@
+<view class="cu-list menu-avatar">
+    <view class="cu-item ">
+        <view class="cu-avatar radius lg" style="background-image:url({{detail.img}});"></view>
+        <view class="content">
+            <view class="text-pink">
+                <text class="text-cut text-black">{{detail.goods_name}}</text>
+            </view>
+            <view class="text-gray text-sm flex">
+                <text class="text-cut text-lg text-orange">{{detail.price}}元</text>
+            </view>
+        </view>
+        <view class="action"></view>
+    </view>
+</view>
+<form bindsubmit="formSubmit" class="" reportSubmit="true">
+    <view bindtap="address" class="flex  p-xs mb-sm padding bg-white margin-top-sm">
+        <view class="flex-treble" style="flex:4;" wx:if="{{address}}">
+            <view class="text-black text-lg padding-xs">
+        {{address.address}} {{address.address_detail}}
+      </view>
+            <view class="padding-left-xs">
+        {{address.name}} {{address.phone}}
+      </view>
+        </view>
+        <view bindtap="address" class="flex-treble padding" style="flex:4;" wx:else>
+      +添加服务地址
+    </view>
+        <view bindtap="address" class=" align-center text-center padding-top" style="flex:0.2;">
+            <text class="cuIcon-right margin-top text-lg text-grey"></text>
+        </view>
+    </view>
+    <view class="cu-form-group bg-white margin-top-sm">
+        <view class="title text-black">上门时间</view>
+        <picker bindchange="bindPickerChange" bindcolumnchange="bindColumnChange" mode="multiSelector" range="{{date}}" value="{{dateIndex}}">
+            <view class="picker text-ox">
+        {{date[0][ dateIndex[0] ]}} {{date[1][ dateIndex[1] ]}}
+      </view>
+        </picker>
+    </view>
+    <view class="cu-form-group align-start margin-top-sm">
+        <view class="title">备注：</view>
+        <textarea maxlength="-1" name="remark" placeholder="" placeholderClass="placeholder"></textarea>
+    </view>
+    <view class="cu-form-group bg-white margin-top-sm">
+        <view class="title text-black">优惠券</view>
+        <view wx:if="{{card==''}}">没有可使用的优惠券</view>
+        <view wx:else>{{card.name}} 
+      <text class="text-red">-{{card.jian}} </text>
+            <checkbox-group bindchange="edit_card_id" style="display: inline;">
+                <checkbox checked value="1"></checkbox>
+            </checkbox-group>
+        </view>
+    </view>
+    <view class="cu-bar bg-white tabbar border shop" style="bottom:0rpx; position:fixed;width:100%;border-top: 2rpx solid rgba(0, 0, 0, 0.1);">
+        <button class="action bg-white" openType="contact">
+            <view class="cuIcon-service"></view> 在线咨询
+  </button>
+        <view class="text-orange text-right margin-right-sm text-df" style="width:260rpx">
+     合计：{{detail.rear_price}}元
+  </view>
+        <button class="indexbottom submit text-white bg-orange" formType="submit">支付</button>
+    </view>
+</form>

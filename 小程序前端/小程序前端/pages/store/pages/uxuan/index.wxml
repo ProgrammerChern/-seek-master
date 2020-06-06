@@ -1,0 +1,81 @@
+<scroll-view scrollX class="bg-white nav solid-top">
+    <view class="flex text-center">
+        <view bindtap="tabSelect" class="flex-sub cu-item {{TabCur==1?'text-tabbar cur':''}}" data-id="1">
+      待服务
+    </view>
+        <view bindtap="tabSelect" class="flex-sub cu-item {{TabCur==3?'text-tabbar cur':''}}" data-id="3">
+      已完成
+    </view>
+    </view>
+</scroll-view>
+<view wx:if="{{list.length!=0}}" wx:for="{{list}}">
+    <view class="cu-bar bg-white solid-bottom margin-top padding" style="height: 80rpx;">
+        <view class="text-sm" wx:if="{{item.status=='1'}}">服务中</view>
+        <view class="text-sm" wx:if="{{item.status=='3'}}">已完成</view>
+        <view class="text-sm" wx:if="{{item.status=='4'}}">退款中</view>
+        <view class="text-sm" wx:if="{{item.status=='5'}}">已退还</view>
+        <view class="action text-gray" style="margin-right:0rpx">
+            <view class="icon-delete" wx:if="{{item.status=='2'}}"></view>
+        </view>
+    </view>
+    <view class="padding bg-white">
+        <navigator url="/pages/store/pages/orderDetail/index?orderid={{item.id}}">
+            <view class="flex flex-wrap">
+                <view class="basis-xl text-xl text-black text-bold">{{item.type_name}}</view>
+                <view class="basis-xl text-gray text-xs padding-top-sm">发布时间：{{item.create_time}}</view>
+                <view class="basis-ql text-df padding-top">
+                    <view class="title">订单编号:
+            <text class="text-black"> {{item.o_sn}}</text>
+                    </view>
+                </view>
+                <view class="basis-ql text-df padding-top-sm">
+                    <view class="title">联系电话:
+            <text class="text-black"> {{item.phone}}</text>
+                        <button catchtap="call" class="cu-btn line-blue sm fr" data-phone="{{item.phone}}" wx:if="{{item.status!='2'&&item.status!='0'}}">拨打电话</button>
+                    </view>
+                </view>
+                <view class="basis-ql text-df padding-top-sm">
+                    <view class="title">上门地址:
+            <text class="text-black text-content"> {{item.address}}</text>
+                    </view>
+                </view>
+                <view class="basis-ql text-df padding-top-sm">
+                    <view class="title">详细地址:
+            <text class="text-black"> {{item.address_detail}}</text>
+                        <button catchtap="daohang" class="cu-btn line-blue sm fr" data-address="{{item.address}}" data-latitude="{{item.mapx}}" data-longitude="{{item.mapy}}" wx:if="{{item.status!='2'&&item.status!='0'}}">地址导航</button>
+                    </view>
+                </view>
+                <view class="basis-ql text-df padding-top-sm" wx:if="{{item.status=='1'||item.status=='3'||item.status=='5'}}">
+                    <view class="title">订单金额:
+            <text class=" text-orange"> ￥ {{item.sure_price?item.sure_price:0}}</text>
+                    </view>
+                </view>
+                <view class="basis-ql text-df padding-top-sm" wx:if="{{item.status=='3'&&item.account>0}}">
+                    <view class="title">收益:
+            <text class=" text-orange"> ￥ {{item.account?item.account:0}}</text>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <navigator url="/pages/store/pages/orderDetail/index?orderid={{item.id}}">
+        <view class="cu-bar bg-white solid-bottom solid-top padding-left" style="height: 80rpx;">
+            <view class="text-sm text-olive">
+        查看订单详情
+      </view>
+            <view class="action text-gray">
+                <view class="text-gray" data-orderid="{{item.id}}">查看 </view>
+                <view class="cuIcon-right"></view>
+            </view>
+        </view>
+    </navigator>
+</view>
+<view class="text-sm text-gray text-center padding" wx:if="{{is_last}}">
+  没有更多了......
+</view>
+<view wx:if="{{list.length==0}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">暂无订单记录</view>
+    </view>
+</view>

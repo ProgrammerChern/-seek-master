@@ -1,0 +1,21 @@
+<swiper autoplay="true" circular="true" class="screen-swiper square-dot" duration="500" indicatorDots="true" interval="5000" style="min-height:600rpx;height:600rpx;">
+    <swiper-item wx:for="{{imgs}}">
+        <image mode="aspectFill" src="{{item.img_patch}}"></image>
+    </swiper-item>
+</swiper>
+<view class="margin-top bg-white padding" style="margin-bottom:54rpx">
+    <rich-text class="text-gray rich" nodes="{{concent}}"></rich-text>
+</view>
+<view class="cu-bar bg-white tabbar border shop" style="bottom:0rpx; position:fixed;width:100%;border-top: 2rpx solid rgba(0, 0, 0, 0.1);">
+    <button bindtap="upPhoto" class="action bg-white text-orange">
+        <view class="cuIcon-share text-orange"></view> 分享海报
+  </button>
+    <button class="action bg-white" openType="contact">
+        <view class="cuIcon-service"></view> 在线咨询
+  </button>
+    <view class="text-orange text-right margin-right-sm text-lg" style="width:200rpx">
+     {{detail.price}}元起
+  </view>
+    <view bindtap="goPay" class="submit text-white bg-ox" data-id="{{detail.id}}">立即预约</view>
+</view>
+<canvas canvasId="shareCanvas" style="width:414px;height:530px;opacity:0;position:fixed;left: 10000rpx"></canvas>

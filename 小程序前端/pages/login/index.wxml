@@ -1,0 +1,11 @@
+<swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorActiveColor="rgb(255, 255, 255)" indicatorColor="rgba(255, 255, 255, 0.4)" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+    <swiper-item wx:for="{{imgUrls}}">
+        <image class="slide-image" height="500" src="{{item.img}}" width="355"></image>
+    </swiper-item>
+</swiper>
+<view class="bg-white" style="margin-top:200rpx">
+    <view class="flex padding justify-around">
+        <button bindtap="authFalse" class="cu-btn round  line-gray" style="width:42%;height: 80rpx;">我在想想</button>
+        <button bindgetuserinfo="updateUserInfo" class="cu-btn round bg-blue" openType="getUserInfo" style="width:42%; height: 80rpx;" wx:if="{{canIUse}}">授权登录</button>
+    </view>
+</view>

@@ -1,0 +1,47 @@
+<view class="padding flex flex-direction" wx:if="{{logList.length<1}}">
+    <button bindtap="toform" class="cu-btn bg-white margin-tb shadow lg button-hover" role="button" style="border-radius:40rpx;font-size:26rpx;">创建进度</button>
+</view>
+<view class="cu-timeline" wx:if="{{logList.length>0}}" wx:for="{{logList}}" wx:key="{{index}}">
+    <view class="cu-item text-green">
+        <view class="cu-card case {{isCard?'no-card':''}}">
+            <view class="cu-item shadow">
+                <view class="image">
+                    <image mode="widthFix" src="{{item.img_path}}" style="max-height:260rpx"></image>
+                    <view class="cu-tag1 bg-white text-green">s{{item.step}}</view>
+                    <view class="cu-tag2 bg-green line-white">{{item.create_time_format}}</view>
+                    <view class="cu-bar bg-shadeBottom">
+                        <text class="text-cut">{{item.line_desc}}</text>
+                    </view>
+                </view>
+                <view class="cu-list menu-avatar">
+                    <view class="bg-white padding-left-sm">
+                        <view class="padding-sm" style="border-top:2rpx solid #F5F5F5;width:97%;">
+                            <text bindtap="gosetting" class="text-green text-sm" data-id="{{item.id}}">设置</text>
+                            <text bindtap="goDel" class="text-red text-sm margin-left" data-id="{{item.id}}">删除</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="bottom:10rpx;text-align:right;padding-right:50rpx;padding-bottom:20rpx; position:fixed;width:100%" wx:if="{{logList.length>0}}">
+        <button class="cu-btn bg-white shadow round margin-right" openType="share" style="width:260rpx;">转发</button>
+        <button bindtap="toform" class="cu-btn bg-green shadow round margin-right" style="width:160rpx;">新建</button>
+    </view>
+</view>
+<view class="cu-modal {{is_del_show==true?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">确定删除吗?</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class="action">
+                <button bindtap="hideModal" class="cu-btn line-green text-green">取消</button>
+                <button bindtap="delItem" class="cu-btn bg-green margin-left">确定</button>
+            </view>
+        </view>
+    </view>
+</view>

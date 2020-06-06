@@ -1,0 +1,335 @@
+
+
+<view class="bg-white" wx:if="{{show}}" >
+    <view class="padding bg-white" wx:if="{{content}}">
+        <rich-text nodes="{{content}}"></rich-text>
+        <button bindtap="shuoming" class="cu-btn block bg-ox margin-tb-sm lg text-white">知道了</button>
+    </view>
+<view class="insrructions-container" wx:else>
+        <view class="content">
+            <view class="title">
+                <text>报价订单</text>
+            </view>
+            <view>
+                <view class="cell">
+                    <text>1、该订单为报价订单，下单后，多个师傅参与报价，<text style="color:#FF7043;">请及时关注公众号推送消息，并选择其中一位合适的师傅并支付其报价；</text>
+                    </text>
+                </view>
+                <view class="cell">
+                    <text>2、师傅将与您预约时间，准时上门服务；</text>
+                </view>
+                <view class="cell">
+                    <text>3、师傅上门后，现场产生增项服务（实际服务超出您在线发布的需求），需双方协商价格，同意后开始服务，若师傅违规乱加价，您可对师傅进行投诉，平台会保障您的权益；</text>
+                </view>
+            </view>
+            <view class="title" style="background:#F4FAF8;color:#00C87C;">
+                <text>下单流程</text>
+            </view>
+            <view class="useprocess">
+                <image src="https://jiating-oss.wanshifu.com/wxapp/icon/20190304/icon_186.png"></image>
+            </view>
+            <view class="title" style="background:#F4FAF8;color:#00C87C;">
+                <text>服务承诺</text>
+            </view>
+            <view class="promise">
+                <view class="block">
+                    <image src="/pages/images/icon_176.png"></image>
+                    <text>未服务全额退</text>
+                    <view>
+                        <text>师傅未上门服务前，支持全额退款，退款将于0-3个工作日内到账</text>
+                    </view>
+                </view>
+                <view class="block">
+                    <image src="/pages/images/icon_178.png"></image>
+                    <text>30分钟内预约</text>
+                    <view>
+                        <text>用户雇佣师傅并支付完成后，师傅将会在30分钟内预约用户上门服务的时间</text>
+                    </view>
+                </view>
+                <view class="block">
+                    <image src="/pages/images/icon_184.png"></image>
+                    <text>准时上门服务</text>
+                    <view>
+                        <text>师傅按照预约时间，准时上门服务</text>
+                    </view>
+                </view>
+            </view>
+            <view class="tips">
+                <image src="https://jiating-oss.wanshifu.com/wxapp/icon/20190304/icon_194.png"></image>
+            </view>
+                <button class="btn" bindtap="shuoming" hoverClass="btn-hover">我知道了</button>
+            <view style="height:75rpx;"></view>
+        </view>
+    </view>
+</view>
+<view wx:else>
+    <view class="bg-white text-center padding-bottom-sm">
+     <image style="width:669rpx;height: 130rpx;" src="/pages/images/ba.png" wx:if="{{!info.order_img}}"></image>
+        <image mode="widthFix" src="{{info.order_img}}" wx:else></image>
+    </view>
+    <form bindsubmit="formSubmit" class="" >
+        <view bindtap="address" class="flex  p-xs mb-sm padding bg-white margin-top-sm">
+            <view class="flex-treble" style="flex:4;" wx:if="{{address}}">
+                <view class="text-black text-lg padding-xs">
+          {{address.address}} {{address.address_detail}}
+        </view>
+                <view class="padding-left-xs">
+          {{address.name}} {{address.phone}}
+        </view>
+            </view>
+            <view class="flex-treble padding" style="flex:4;" wx:else>
+        +添加服务地址
+      </view>
+            <view class=" align-center text-center padding-top" style="flex:0.2;">
+                <text class="cuIcon-right margin-top text-lg text-grey"></text>
+            </view>
+        </view>
+
+        <view class="cu-form-group bg-white margin-top-sm">
+            <view class="title text-black">期待上门时间</view>
+            <picker bindchange="bindPickerChange" bindcolumnchange="bindColumnChange" mode="multiSelector" range="{{date}}" value="{{dateIndex}}">
+                <view class="picker text-ox">
+          {{date[0][ dateIndex[0] ]}} {{date[1][ dateIndex[1] ]}}
+        </view>
+            </picker>
+        </view>
+         <view class="cu-form-group bg-white margin-top-sm number-container" wx:if="{{type.num}}">
+            <view class="title text-black">
+                <text>{{type.num}}</text>
+            </view>
+            <view class="number">
+                <view catchtap="subtract" class="block subtract-block" >
+                    <image src="/pages/images/jian_btn@2x.png" wx:if="{{num<=1}}"></image>
+                    <image src="/pages/images/jian_btn_active@2x.png" wx:else></image>
+                </view>
+                <view class="content">
+                    <input bindinput="bindNumber"  type="number" value="{{num}}"></input>
+                </view>
+                <view catchtap="add" class="block add-block" >
+                    <image src="/pages/images/jia_btn@2x.png" wx:if="{{num>=9999}}"></image>
+                    <image src="/pages/images/jia_btn_active@2x.png" wx:else></image>
+                </view>
+            </view>
+        </view>
+
+<view class="cu-form-group bg-white margin-top-sm crumb-containor" wx:if="{{type.multi  && type.multivalue }}" catchtap="goodsShowModal">
+    <view class="title text-black">
+        <text>{{type.multi}}</text>
+    </view>
+    <view class="value">
+        <block wx:if="{{goods!=''}}">
+             {{goods}}
+        </block>
+        <block wx:else>请选择</block>
+    </view>
+</view>
+<view class="popup-container">
+    <view catchtap="goodsShowModal"  class="popup-mask" wx:if="{{goodsShowModal}}">
+        <view   class="popup animated fadeInUp" >
+            <view>
+                <view class="scope-containor">
+                    <view class="content">
+                        <view class="close" catchtap="goodsShowModal">
+                            <image src="/pages/images/icon_182.png"></image>
+                        </view>
+                        <view class="title">
+                            <text>{{type.multi}}</text>
+                        </view>
+                        <scroll-view scrollY class="group" style="max-height: ">
+                            <view catchtap="selected" class="row" data-index="{{index}}" wx:for="{{type.multivalue}}" wx:key="index">
+                                <view class="item" style="width:300rpx;{{item.selected?'background:#F7FDFB;color:#09C980;border:2rpx solid #09C980;box-sizing: border-box;':''}}">
+                                    <text>{{item.title}}</text>
+                                    <image src="/pages/images/icon_214.png" wx:if="{{item.selected}}"></image>
+                                </view>
+                                <view catchtap="gbindNumber" class="number" wx:if="{{item.selected}}">
+                                    <view catchtap="gsubtract" class="block subtract-block" data-index="{{index}}">
+                                        <image src="/pages/images/icon_200.png"></image>
+                                    </view>
+                                    <view class="content">
+                                        <input bindinput="gbindNumber" data-index="{{index}}" type="number" value="{{item.number}}"></input>
+                                    </view>
+                                    <view catchtap="gadd" class="block add-block" data-index="{{index}}" >
+                                        <image src="/pages/images/icon_202.png"></image>
+                                    </view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                        <view catchtap="goodsShowModal" class="ok" >
+                            <text>确认</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="cu-form-group bg-white margin-top-sm crumb-containor" wx:if="{{type.select && type.selectvalue }}" catchtap="typeShowModal">
+    <view class="title text-black">
+        <text>{{type.select}}</text>
+    </view>
+    <view class="value">
+        <block wx:if="{{types!=''}}">
+             {{types}}
+        </block>
+        <block wx:else>请选择</block>
+    </view>
+</view>
+<view class="popup-container">
+    <view catchtap="typeShowModal"  class="popup-mask" wx:if="{{typeShowModal}}">
+        <view   class="popup animated fadeInUp" >
+            <view>
+                <view class="scope-containor">
+                    <view class="content">
+                        <view class="close" catchtap="typeShowModal">
+                            <image src="/pages/images/icon_182.png"></image>
+                        </view>
+                        <view class="title">
+                            <text>{{type.select}}</text>
+                        </view>
+                        <scroll-view scrollY class="group" style="max-height: ">
+                            <view catchtap="typeselected" class="row" data-index="{{index}}" wx:for="{{type.selectvalue}}" wx:key="">
+                                <view class="item" style="width:600rpx;{{item.selected?'background:#F7FDFB;color:#09C980;border:2rpx solid #09C980;box-sizing: border-box;':''}}">
+                                    <text>{{item.title}}</text>
+                                    <image src="/pages/images/icon_214.png" wx:if="{{item.selected}}"></image>
+                                </view>
+                            </view>
+                        </scroll-view>
+                        <view catchtap="typeShowModal" class="ok" >
+                            <text>确认</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-form-group bg-white margin-top-sm crumb-containor" wx:if="{{type.radio  && type.radiovalue }}" catchtap="deviceShowModal">
+    <view class="title text-black">
+        <text>{{type.radio}}</text>
+    </view>
+    <view class="value">
+        <block wx:if="{{device>=0}}">
+           {{type.radiovalue[device]}}
+        </block>
+        <block wx:else>请选择</block>
+    </view>
+</view>
+<view class="popup-container">
+    <view catchtap="deviceShowModal"  class="popup-mask" wx:if="{{deviceShowModal}}">
+        <view   class="popup animated fadeInUp" >
+            <view>
+                <view class="scope-containor">
+                    <view class="content">
+                        <view class="close" catchtap="deviceShowModal">
+                            <image src="/pages/images/icon_182.png"></image>
+                        </view>
+                        <view class="title">
+                            <text>{{type.radio}}</text>
+                        </view>
+                        <scroll-view scrollY class="group" style="max-height: ">
+                            <view catchtap="radioselected" class="row" data-index="{{index}}" wx:for="{{type.radiovalue}}" wx:key="">
+                                <view class="item" style="width:600rpx;{{index==device?'background:#F7FDFB;color:#09C980;border:2rpx solid #09C980;box-sizing: border-box;':''}}">
+                                    <text>{{item}}</text>
+                                    <image src="/pages/images/icon_214.png" wx:if="{{index==device}}"></image>
+                                </view>
+                            </view>
+                        </scroll-view>
+                        
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+        <view class="cu-form-group bg-white margin-top-sm radio-containor" wx:if="{{type.tips}}">
+            <view class="title text-black">{{type.tips}}</view>
+            <view class="button">
+                <view bindtap="changeRadio" class="yes" data-a="1" style="{{provide==1?'color: #00c87c;border: 2rpx solid #00c87c;':'color: #333;border: 2rpx solid #ddd;'}}">
+                    <text>需要</text>
+                </view>
+                <view bindtap="changeRadio" class="no" data-a="0" style="{{provide==0?'color: #00c87c;border: 2rpx solid #00c87c;':'color: #333;border: 2rpx solid #ddd;'}}">
+                    <text>不需要</text>
+                </view>
+            </view>
+
+        </view>
+        <view class="popup-container">
+            <view catchtap="close"  class="popup-mask" wx:if="{{agreementShowModal}}">
+                <view  class="popup animated fadeInUp" >
+                    <view>
+                        <view class="agreement-container">
+                            <view class="title">
+                                <text>是否{{type.tips}}</text>
+                            </view>
+                            <view class="content" wx:if="{{type.tipsvalue!=''}}">
+                                <view class="description">
+                                    <text>{{type.tipsvalue}}</text>
+                                </view>
+                                
+                            </view>
+                            <view class="content" wx:else>
+                                <view class="description">
+                                    <text>若您需要师傅提供配件，师傅报价时将包括配件价格，并在上门时为您携带相关配件；</text>
+                                </view>
+                                <view class="description" style="margin-bottom:0;">
+                                    <text>若您不需要师傅提供配件，您将需要自己备好相关配件，师傅仅提供部分辅料，如：生胶带，玻璃胶等。</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="agreement-bottom">
+                            <view catchtap="changeRadio" data-a="0">
+                                <text>不需要提供</text>
+                            </view>
+                            <view catchtap="changeRadio" data-a="1">
+                                <text>需要提供</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="cu-bar bg-white margin-top-sm   solid-bottom">
+            <view class="action text-black">添加照片</view>
+            <view class="action">{{imgList.length}}/6 </view>
+        </view>
+        <view class="cu-form-group">
+            <view class="grid col-3 grid-square flex-sub padding-sm">
+                <view class="padding-xs bg-img" style="background-image:url({{item.all}});" wx:for="{{imgList}}" wx:key="{{index}}">
+                    <view bindtap="deleteImg" class="cu-tag bg-red" data-id="{{index}}">
+                        <text class="cuIcon-close"></text>
+                    </view>
+                </view>
+                <view bindtap="uplaod" class="padding-xs solids" wx:if="{{imgList.length<6}}">
+                    <text class="cuIcon-cameraadd" wx:if="{{loading}}"></text>
+                    <text class="cuIcon-loading2 cuIconfont-spin" wx:else></text>
+                </view>
+            </view>
+        </view>
+        <view class="cu-form-group align-start margin-top-sm">
+            <view class="title">备注:</view>
+            <textarea maxlength="-1" name="remark" placeholder="" placeholderClass="placeholder"></textarea>
+        </view>
+        <view class="padding flex flex-direction">
+            <button class="cu-btn block bg-ox margin-tb-sm lg text-white" formType="submit">发布需求</button>
+        </view>
+    </form>
+    <view class="padding " wx:if="{{info.tip}}">
+        <text class="text-left text-grey" style="line-height:1.2em">{{info.tip}}</text>
+    </view>
+    <view class="cu-modal {{userblack=='1'?'show':''}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">你的账号已被封号</view>
+                <view bindtap="hideModal" class="action"></view>
+            </view>
+            <view class="padding-xl">
+                <view>到期时间：{{userblack_info.black_time}}</view>
+                <view>封号原因：{{userblack_info.reject}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="/pages/template/login.wxml"></import>
+<template is="login" data="{{isShow:isShow}}"></template>

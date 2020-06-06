@@ -1,0 +1,37 @@
+radio.radio2[checked]::after {
+    content: "";
+    background-color: transparent;
+    display: block;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: 999;
+    top: 0rpx;
+    left: 0rpx;
+    right: 68rpx;
+    bottom: 0;
+    margin: auto;
+    border-radius: 200rpx;
+    border: 8px solid var(--white)!important;
+}
+
+radio.radio1[checked]::after {
+    content: "";
+    background-color: transparent;
+    display: block;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: 999;
+    top: 0rpx;
+    left: 0rpx;
+    right: 94rpx;
+    bottom: 0;
+    margin: auto;
+    border-radius: 200rpx;
+    border: 8px solid var(--white)!important;
+}
+
+radio::before {
+    content: "";
+}

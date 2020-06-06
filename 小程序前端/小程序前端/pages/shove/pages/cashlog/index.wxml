@@ -1,0 +1,26 @@
+<oxnav back="4" id="oxnav" title="提现明细"></oxnav>
+<view wx:if="{{list.length!=0}}">
+    <view class="margin-xs" wx:if="{{list.length!=0}}" wx:for="{{list}}">
+        <view class="padding bg-white flex">
+            <view class="flex-treble text-cut text-red" wx:if="{{item.status_text=='已驳回'}}">已驳回</view>
+            <view class="flex-treble text-cut text-green" wx:if="{{item.status_text=='已通过'}}">已通过</view>
+            <view class="flex-treble text-cut text-gray" wx:if="{{item.status_text=='未审核'}}">未审核</view>
+            <view class="text-red" wx:if="{{item.status_text=='已驳回'}}">驳回原因：{{item.order_describe}}</view>
+        </view>
+        <view class="cu-bar bg-white padding bg-white flex">
+            <view class="text-sm">{{item.create_time}}</view>
+            <text class="fr text-sm">
+                <text>提现金额：￥{{item.money}}</text>
+            </text>
+        </view>
+    </view>
+    <view class="text-sm text-gray text-center padding" wx:if="{{is_last}}">
+    ---没有更多了---
+  </view>
+</view>
+<view wx:else>
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">暂无记录</view>
+    </view>
+</view>

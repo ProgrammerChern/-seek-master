@@ -1,0 +1,43 @@
+switch,checkbox,radio {
+    position: relative;
+}
+
+switch::after,switch::before {
+    font-family: "cuIcon";
+    content: "营";
+    position: absolute;
+    color: var(--white)!important;
+    top: 0%;
+    padding-left: 16rpx;
+    padding-right: 16rpx;
+    font-size: 26rpx;
+    line-height: 26px;
+    width: 50%;
+    text-align: center;
+    pointer-events: none;
+    transform: scale(0,0);
+    transition: all 0.3s ease-in-out 0s;
+    z-index: 9;
+    bottom: 0;
+    height: 26px;
+    margin: auto;
+}
+
+switch::before {
+    content: "休";
+    right: 0;
+    transform: scale(1,1);
+    left: auto;
+}
+
+switch[checked]::after,switch.checked::after {
+    transform: scale(1,1);
+}
+
+switch[checked]::before,switch.checked::before {
+    transform: scale(0,0);
+}
+
+switch[checked]::before {
+    transform: scale(0,0);
+}

@@ -1,0 +1,96 @@
+<view wx:if="{{hqiphone==0}}">
+    <view class="padding  bg-blue margin " style="border:none;height:180rpx;position: relative;margin-top:30rpx;border-radius:10rpx; z-index:100;background-image: url(https://image.weilanwl.com/color2.0/cardBg.png);">
+        <view class="flex mb-sm">
+            <view class="flex-twice bg-blue margin-xs radius" style="text-align:center">
+                <view class="text-white" style="font-size:38rpx">
+        ￥{{user_info.all_take}}
+        </view>
+                <view class="margin-top-sm">
+        已提现
+        </view>
+            </view>
+            <view class="flex-twice bg-blue margin-xs radius" style="text-align:center">
+                <view class="text-white" style="font-size:38rpx">
+        ￥{{user_info.money}}
+        </view>
+                <view class="margin-top-sm">
+        可提现
+        </view>
+            </view>
+            <view class="flex-twice bg-blue margin-xs radius" style="text-align:right">
+                <view class="text-olive" style="font-size:38rpx"></view>
+                <view class="margin-top-lg">
+                    <button bindtap="cash" class="cu-btn  button-hover text-blue" style="height:48rpx">提现</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-list grid col-3 margin">
+        <view bindtap="tuiguang" class="cu-item">
+            <view class="cuIcon-activity text-orange"></view>
+            <text>推广记录</text>
+        </view>
+        <view bindtap="yongjin" class="cu-item">
+            <view class="cuIcon-list text-orange"></view>
+            <text>佣金明细</text>
+        </view>
+        <view bindtap="cashlog" class="cu-item">
+            <view class="cuIcon-sponsor text-orange"></view>
+            <text>提现明细</text>
+        </view>
+        <view bindtap="rank" class="cu-item">
+            <view class="cuIcon-rank text-orange"></view>
+            <text>佣金排行</text>
+        </view>
+        <view bindtap="shareset" class="cu-item">
+            <view class="cuIcon-share text-orange"></view>
+            <text>推广海报</text>
+        </view>
+    </view>
+    <view class="cu-bar bg-white margin-top margin-left margin-right solid-bottom">
+        <view class="action">
+            <text class="cuIcon-title text-blue"></text>推广说明
+    </view>
+    </view>
+    <view class="bg-white padding text-sm margin-left margin-right">
+        <text wx:if="{{info.shove_explain!=null}}">{{info.shove_explain}}</text>
+        <text wx:else>1.分享推广海报，首页或优选时，邀请用户首次点击进入小程序并授权后生成推荐关系
+      2.推广用户分为普通用户和师傅，用户下单并完成，师傅抢单并完成都可获得佣金
+    </text>
+    </view>
+</view>
+<view class="{{hqiphone=='1'?'show':''}} padding text-center">
+    <swiper autoplay="true" circular="true" class="screen-swiper square-dot shadow-lg" duration="500" indicatorDots="true" interval="5000" style="min-height:300rpx;height:300rpx;" wx:if="{{user_info.status==0}}">
+        <swiper-item class="shadow" wx:for="{{banner}}">
+            <image mode="aspectFill" src="{{item.img}}"></image>
+        </swiper-item>
+    </swiper>
+    <form bindsubmit="formSubmit" class="text-left" reportSubmit="true" wx:if="{{user_info.status==0}}">
+        <view class="bg-white cu-card case margin-top-sm ">
+            <view class="cu-form-group">
+                <view class="title text-black">地址</view>
+                <input class="radius" disabled="true" name="address" placeholder="点击获取" value="{{address}}"></input>
+                <button bindtap="tomap" class="cu-btn line-blue sm">获取地址</button>
+            </view>
+            <view class="cu-form-group">
+                <view class="title text-black">姓名</view>
+                <input class="radius" name="name" placeholder="请填写姓名"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title text-black">电话</view>
+                <input class="radius" name="phone" placeholder="请输入联系电话" value="{{phone}}"></input>
+                <button bindgetphonenumber="getPhoneNumber" class="cu-btn line-blue sm" openType="getPhoneNumber">获取电话</button>
+            </view>
+        </view>
+        <button class="cu-btn block bg-ox margin-tb-sm lg text-white" formType="submit" style="margin-top:200rpx">立即申请</button>
+    </form>
+    <view class="padding " style="margin-top:350rpx" wx:if="{{user_info.status==1}}">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">正在审核中哦</view>
+    </view>
+    <view class="padding " style="margin-top:350rpx" wx:if="{{user_info.status==3}}">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title"> 审核被驳回了：{{user_info.reason}}</view>
+    </view>
+</view>
+<canvas canvasId="shareCanvas" style="width:414px;height:736px;opacity:0;position:fixed;"></canvas>

@@ -1,0 +1,64 @@
+<view class="padding bg-white margin-bottom">
+    <view class="flex flex-wrap justify-between">
+        <view class="basis-lg text-xl text-black text-bold">{{order.type_name}}</view>
+        <view class="text-orange sm fr text-right" wx:if="{{order.type=='1'}}">优选：{{order.sure_price}}元</view>
+    </view>
+    <view class="basis-xl text-gray text-xs padding-top-sm ">下单时间：{{order.create_time}}</view>
+</view>
+<form bindsubmit="formSubmit" class="" reportSubmit="true">
+    <view bindtap="address" class="flex  p-xs mb-sm padding bg-white margin-top-sm">
+        <view class="flex-treble" style="flex:4;">
+            <view class="text-black text-lg padding-xs">
+        {{order.address}} {{order.address_detail}}
+      </view>
+            <view class="padding-left-xs">
+        {{order.name}} {{order.phone}}
+      </view>
+        </view>
+        <view class=" align-center text-center padding-top" style="flex:0.2;"></view>
+    </view>
+    <view class="cu-form-group bg-white margin-top-sm">
+        <view class="title text-black">上门时间</view>
+        <view class="picker text-ox">
+      {{order.go_time}}
+    </view>
+    </view>
+    <view class="cu-form-group align-start margin-top-sm">
+        <view class="title">备注：</view>
+        <textarea maxlength="-1" name="remark" placeholder="" placeholderClass="placeholder" value="{{order.remark}}"></textarea>
+    </view>
+    <view class="cu-bar bg-white solid-bottom margin-top-sm" wx:if="{{master}}">
+        <view class="action">
+            <text class="cuIcon-titles text-ox"></text>师傅
+    </view>
+    </view>
+    <view class="flex flex-wrap bg-white padding" wx:if="{{master}}">
+        <view class="basis-xl text-df ">
+            <view class="title">师傅姓名:
+        <text class="text-black"> {{master.name}}</text>
+            </view>
+        </view>
+        <!-- <view class="basis-xl text-df padding-top-sm">
+            <view class="title">联系电话:
+                <text class="text-black"> {{master.phone}}</text>
+            </view>
+        </view> -->
+        <view class="basis-ql text-df padding-top-sm">
+            <view class="title">报价:
+        <text class=" text-orange"> ￥ {{bidding.price}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-bar bg-white tabbar border shop" style="bottom:0rpx; position:fixed;width:100%;border-top: 2rpx solid rgba(0, 0, 0, 0.1);">
+        <button class="action bg-white" openType="contact">
+            <view class="cuIcon-service"></view> 在线咨询
+    </button>
+        <view class="text-orange text-right margin-right-sm text-df" style="width:260rpx" wx:if="{{order.type=='0'}}">
+      合计：{{bidding.price}}元
+    </view>
+        <view class="text-orange text-right margin-right-sm text-df" style="width:260rpx" wx:if="{{order.type=='1'}}">
+      合计：{{order.sure_price}}元
+    </view>
+        <button bindtap="sureReapir" class="indexbottom submit text-white bg-orange" data-orderid="{{order.id}}" data-rid="{{master.uid}}">支付</button>
+    </view>
+</form>

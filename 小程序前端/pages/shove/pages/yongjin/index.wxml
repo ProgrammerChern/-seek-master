@@ -1,0 +1,25 @@
+<oxnav back="4" id="oxnav" title="佣金明细"></oxnav>
+<view wx:if="{{list.length!=0}}">
+    <view class="margin-xs" wx:if="{{list.length!=0}}" wx:for="{{list}}">
+        <view class="padding bg-white flex">
+            <view class="flex-treble text-cut text-gray">{{item.desc}}</view>
+            <view class="text-orange" wx:if="{{item.money>0}}">+{{item.money}}</view>
+            <view class="text-green" wx:else>{{item.money}}</view>
+        </view>
+        <view class="cu-bar bg-white padding bg-white flex">
+            <view class="text-sm">{{item.datetime}}</view>
+            <text class="fr text-sm">
+                <text>余额：￥{{item.last_money}}</text>
+            </text>
+        </view>
+    </view>
+    <view class="text-sm text-gray text-center padding" wx:if="{{is_last}}">
+    ---没有更多了---
+  </view>
+</view>
+<view wx:else>
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">暂无记录</view>
+    </view>
+</view>

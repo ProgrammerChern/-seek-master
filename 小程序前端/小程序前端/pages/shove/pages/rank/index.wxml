@@ -1,0 +1,21 @@
+<view class="cu-bar bg-white solid-bottom margin-top-xs">
+    <view class="action">
+        <text class="cuIcon-upstagefill text-blue"> 我的名次：{{mingci}}</text>
+    </view>
+</view>
+<view class="cu-list menu menu-avatar">
+    <view class="cu-item" wx:for="{{list}}">
+        <view class="cu-avatar round lg" style="background-image:url({{item.avatarUrl}});"></view>
+        <view class="content">
+            <view>{{item.member_name}}</view>
+            <view>
+                <view class="text-gray text-sm">昵称：{{item.nick_name}}</view>
+                <view class="text-gray text-sm">累计：￥{{item.all_money}}
+      </view>
+            </view>
+        </view>
+        <view class="action" style="float:right;">
+            <view class="cu-tag round {{index<3?'bg-orange':'bg-grey'}}  sm">{{index+1}}</view>
+        </view>
+    </view>
+</view>

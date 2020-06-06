@@ -1,0 +1,62 @@
+<view class=" margin-top" wx:for="{{reapirlist}}">
+    <view class="cu-item shadow padding bg-white">
+        <view class="flex flex-wrap">
+            <view bindtap="call" class="basis-lg text-df padding-top-sm" data-rid="{{item.reapir_uid}}">
+                <view class="title">姓名:
+          <text class="text-black text-content">  {{item.name}}</text>
+                </view>
+            </view>
+            <view class="text-red margin-top-xs">
+                <button bindtap="call" class="cu-btn  line-ox margin-left-xl" data-rid="{{item.reapir_uid}}" formType="submit">师傅详情</button>
+            </view>
+            <view style="width:100%">
+                <view class="cu-capsule radius" wx:if="{{item.card_status==1}}">
+                    <view class="cu-tag bg-blue" style="height: 38rpx;padding:0px 3px">
+                        <text class="cuIcon-vipcard"></text>
+                    </view>
+                    <view class="cu-tag line-blue" style="height: 38rpx;font-size: 20rpx;padding:0px 3px">
+            实名认证
+          </view>
+                </view>
+                <view class="cu-capsule radius" wx:if="{{item.card_auth_pay_status==1}}">
+                    <view class="cu-tag bg-red" style="height: 38rpx;padding:0px 3px">
+                        <text class="cuIcon-moneybagfill"></text>
+                    </view>
+                    <view class="cu-tag line-red" style="height: 38rpx;font-size: 20rpx;padding:0px 3px">
+            保证金
+          </view>
+                </view>
+            </view>
+            <view bindtap="call" class="basis-xl text-df padding-top-sm" data-rid="{{item.reapir_uid}}">
+                <view class="title">位置:
+          <text class="text-black text-content">  {{item.address}}{{item.address_detail=='undefined'?'':item.address_detail}}</text>
+                </view>
+            </view>
+            <view bindtap="call" class="basis-ql text-df padding-top-sm" data-rid="{{item.reapir_uid}}">
+                <view class="title">回复:
+          <text class="text-black">{{item.remark?item.remark:'无'}}</text>
+                </view>
+            </view>
+            <view class="basis-xl text-df padding-top-sm" wx:if="{{item.img1}}">
+                <view class="title">
+                    <view style="float:left">图片:</view>
+                    <view class="grid col-3 grid-square  bg-white flex-sub" style="float:left;">
+                        <view bindtap="preview" class="padding-xs bg-img " data-url="{{item.img1}}" style="background-image:url({{item.img1}});width:140rpx;height:140rpx;margin-left:10rpx;" wx:if="{{item.img1}}"></view>
+                        <text wx:else>无</text>
+                    </view>
+                    <view class="grid col-3 grid-square  bg-white flex-sub" style="float:left">
+                        <view bindtap="preview" class="padding-xs bg-img " data-url="{{item.img2}}" style="background-image:url({{item.img2}});width:140rpx;height:140rpx;" wx:if="{{item.img2}}"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-bar bg-white tabbar border shop solid-top">
+        <view class=" text-left margin-right-sm text-lg padding" style="width:400rpx">
+            <view class="" style="display:inline">报价：</view>
+            <view class="text-orange" style="display:inline"> {{item.price}} 元</view>
+        </view>
+        <view bindtap="selPay" class="bg-ox submit text-white text-lg" data-bid="{{item.bid}}" data-orderid="{{item.order_id}}" data-price="{{item.price}}" data-rid="{{item.reapir_uid}}" style="width:200rpx">选他服务</view>
+    </view>
+</view>
+<view style="height:100rpx;"></view>

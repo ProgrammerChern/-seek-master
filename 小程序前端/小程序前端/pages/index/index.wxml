@@ -1,0 +1,97 @@
+<import src="/components/wxSearch/wxSearch.wxml"></import>
+<oxtip id="oxtip"></oxtip>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+    <view class="search-form round">
+        <text class="icon-search"></text>
+        <input bindblur="wxSearchBlur" bindfocus="wxSerchFocus" bindinput="wxSearchInput" class="padding-left" confirmType="search" placeholder="输入搜索的关键词" type="text" value="{{wxSearchData.value}}"></input>
+    </view>
+    <view class="action" hoverClass="none">
+        <text>{{title}}</text>
+        <text class="cuIcon-locationfill"></text>
+    </view>
+</view>
+<template is="wxSearch" data="{{wxSearchData:wxSearchData}}"></template>
+<swiper autoplay="true" circular="true" class="screen-swiper square-dot shadow-lg" duration="500" indicatorDots="true" interval="5000" style="min-height:300rpx;height:300rpx;margin-top:100rpx">
+    <swiper-item bindtap="goT" class="shadow" data-type="1" data-url="{{item.url}}" wx:for="{{banner}}">
+        <image mode="aspectFill" src="{{item.img}}"></image>
+    </swiper-item>
+</swiper>
+<view class="cu-list grid col-4 no-border" style="padding:0rpx;margin:0rpx;" wx:if="{{nav.length>0}}">
+    <view class="cu-item" wx:for="{{nav}}">
+        <form bindsubmit="gofenlei" data-id="{{item.id}}" data-name="{{item.name}}" reportSubmit="true">
+            <button class="indexbottom" formType="submit">
+                <image class="modle_view_modle_img" mode="widthFix" src="{{item.img}}"></image>
+                <view class="text-gray text-df ">{{item.name}}</view>
+            </button>
+        </form>
+    </view>
+</view>
+<view class="cu-list grid col-4 no-border" style="padding:0rpx;margin:0rpx;" wx:if="{{nav1.length>0}}">
+    <view class="cu-item" wx:for="{{nav1}}">
+        <form bindsubmit="goT" data-type="{{item.type}}" data-url="{{item.nav_url}}" reportSubmit="true">
+            <button class="indexbottom" formType="submit">
+                <image class="modle_view_modle_img" mode="widthFix" src="{{item.nav_icon}}"></image>
+                <view class="text-gray text-df ">{{item.nav_name}}</view>
+            </button>
+        </form>
+    </view>
+</view>
+<view bindtap="uxuan" class="bg-gradual-ox padding-xs margin-sm radius text-center shadow-blur flex justify-between" wx:if="{{goods.length>0}}">
+    <view class="margin-xs text-Abc text-lg">优选服务</view>
+    <view class="margin-xs text-Abc margin-top-xs">更多
+    <view class="cuIcon-right" style="display:inline"></view>
+    </view>
+</view>
+<scroll-view scrollWithAnimation scrollX class="bg-white nav " scrollLeft="0" style="" wx:if="{{goods.length>0}}">
+    <view bindtap="goDetail" class=" text-center shadow  shadow-lg bg-white margin-top-sm margin-bottom-sm margin-left-sm" data-id="{{item.id}}" style="height:240rpx;line-height:40rpx;width:180rpx;display:inline-block" wx:for="{{goods}}">
+        <view style="height:160rpx;">
+            <image class="margin-top-xs justify-center" mode="widthFix" src="{{item.img}}" style="width:120rpx"></image>
+        </view>
+        <view class=" margin-left-xs text-left text-black ">{{item.goods_name}}</view>
+        <view class="margin-left-xs text-left text-orange">{{item.price}}元</view>
+    </view>
+    <view style="width:40rpx;display:inline-block"></view>
+</scroll-view>
+<view wx:if="{{item.service.length>0}}" wx:for="{{list}}">
+    <view class="flex padding-left-sm padding-right-sm padding-top padding-bottom-xs justify-between">
+        <view class="text-lg text-bold">{{item.name}}</view>
+        <form bindsubmit="goType" data-id="{{item.id}}">
+            <button class="indexbottom" formType="submit" style="background: none !important">
+                <view class="text-df text-grey">
+          查看全部
+          <text class="cuIcon-right"></text>
+                </view>
+            </button>
+        </form>
+    </view>
+    <view class="cu-list menu card-menu shadow  shadow-lg bg-white">
+        <view class="grid col-4 no-border">
+            <view class="cu-item" wx:for="{{item.service}}" wx:for-item="arr">
+                <form bindsubmit="gofenlei" data-id="{{arr.id}}" data-name="{{arr.name}}" >
+                    <button class="indexbottom" formType="submit">
+                        <image class="modle_view_modle_img" mode="aspectFit" src="{{arr.img}}"></image>
+                        <view class=" text-df padding-xs">{{arr.name}}</view>
+                    </button>
+                </form>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="fuceng" wx:if="{{info.shove_fuceng==1}}">
+    <button class="cu-avatar round" openType="share" style="border: 4rpx solid #1acd6f;background-image:url({{fu_img.shove}});"></button>
+</view>
+<view class="fuceng2" wx:if="{{info.shove_fuceng==1}}">
+    <button class="cu-avatar round" openType="contact" style="border: 4rpx solid #1acd6f;background-image:url({{fu_img.kefu}});"></button>
+</view>
+<official-account class="margin-xs radius"></official-account>
+<view style="height:60rpx;"></view>
+<view class="cu-modal {{isShow?'show':''}}">
+    <view class="cu-dialog" style="background:none;width: 540rpx;">
+        <view bindtap="goT" class="bg-img" data-type="1" data-url="{{advert.url}}" style="background-image: url({{advert.img}});height:340px;"></view>
+        <view class="cu-bar justify-center text-white margin-top-xl">
+            <view bindtap="hideModal" class="action" style="padding:10rpx;border:1px solid #fff;border-radius:50%;">
+                <text class="cuIcon-close " style="margin:auto;"></text>
+            </view>
+        </view>
+    </view>
+</view>

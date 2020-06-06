@@ -1,0 +1,40 @@
+<view>
+    <form bindsubmit="formSubmit" class="">
+        <view class="cu-form-group bg-white margin-top-sm">
+            <view class="title text-black">金额</view>
+            <input class="radius" name="prices" placeholder="请填写报价金额"></input>
+        </view>
+        <view class="cu-form-group align-start margin-top-sm">
+            <view class="title">备注</view>
+            <textarea maxlength="-1" name="remark" placeholder="请填写备注信息" placeholderClass="placeholder"></textarea>
+        </view>
+        <view class="cu-bar bg-white margin-top-sm   solid-bottom">
+            <view class="action text-black">
+        添加照片
+      </view>
+            <view class="action">
+        {{imgList.length}}/2
+      </view>
+        </view>
+        <view class="cu-form-group  ">
+            <view class="grid col-3 grid-square flex-sub padding-sm">
+                <view class="padding-xs bg-img" style="background-image:url({{item.all}});" wx:for="{{imgList}}" wx:key="{{index}}">
+                    <view bindtap="deleteImg" class="cu-tag bg-red" data-id="{{index}}">
+                        <text class="cuIcon-close"></text>
+                    </view>
+                </view>
+                <view bindtap="uplaod" class="padding-xs solids" wx:if="{{imgList.length<2}}">
+                    <text class="cuIcon-cameraadd" wx:if="{{loading}}"></text>
+                    <text class="cuIcon-loading2 cuIconfont-spin" wx:else></text>
+                </view>
+            </view>
+        </view>
+        <view class="padding flex flex-direction">
+            <button class="cu-btn block bg-ox margin-tb-sm lg text-white" formType="submit">立即报价</button>
+        </view>
+    </form>
+    <view class="padding ">
+        <text class="text-left text-grey" style="line-height:1.2em">温馨提示：
+    竞标成功后可在我的竞标中修改价格</text>
+    </view>
+</view>

@@ -1,0 +1,72 @@
+<view class="card padding  case margin radius bg-white">
+    <view class="flex">
+        <view class="flex-sub ">
+            <view class="text-black text-xl text-bold solid-bottom padding-bottom">{{detail.name}}
+        <view class="cu-tag margin-left-sm line-grey text-df sm" wx:if="{{idcard&&idcard.status==1}}">实名认证</view>
+            </view>
+            <view class="cu-tag line-gray margin-sm " wx:for="{{detail.type_name}}">{{item}}</view>
+        </view>
+        <view class="flex-sub bg-white  shadow ">
+            <image class="shadow" mode="aspectFill" src="{{imgList[0].img_patch}}" style="width:316rpx" wx:if="{{imgList[0]}}"></image>
+            <image class="shadow" mode="aspectFill" src="/pages/images/adminmo.png" style="width:316rpx" wx:else></image>
+        </view>
+    </view>
+    <view class=" cu-list grid col-3 margin-top solid">
+        <view class="cu-item ">
+            <view class="text-xl text-bold margin-top">{{detail.orderTotal}}</view>
+            <view class=" text-df padding-xs">服务次数</view>
+        </view>
+        <view class="cu-item">
+            <view class="text-xl text-bold margin-top text-red">{{detail.appraiseTotal}}</view>
+            <view class=" text-df padding-xs">好评次数</view>
+        </view>
+        <view class="cu-item">
+            <view class="cuIcon-check text-bold text-green" wx:if="{{idcard&&idcard.status==1}}"></view>
+            <view class="cuIcon-close text-bold text-red" wx:else></view>
+            <view class=" text-df padding-xs">实名认证</view>
+        </view>
+    </view>
+</view>
+<view class="margin">
+    <view class="cu-bar bg-white margin-top solid-bottom">
+        <view class="action">
+            <view class=" text-black text-xl text-bold">简介</view>
+        </view>
+    </view>
+    <view class="padding bg-white solid-bottom">{{detail.detail}}</view>
+    <view class="bg-white ">
+        <view class="flex flex-wrap"></view>
+        <view class="basis-ql text-df padding solid-bottom ">
+            <view class="title">入驻时间:
+        <text class="text-black"> {{detail.create_time}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="margin">
+    <view class="cu-bar bg-white margin-top solid-bottom">
+        <view class="action">
+            <view class=" text-black text-xl text-bold">用户评价</view>
+        </view>
+    </view>
+    <view class="cu-list menu  comment solids-bottom ">
+        <view class="cu-item" wx:for="{{appraiseList}}">
+            <view class="content padding-top-sm">
+                <view class="text-grey">{{item.nickname}}</view>
+                <view class="text-gray text-content text-df">
+          {{item.detail}}
+        </view>
+                <view class="margin-top-sm flex justify-end">
+                    <view class="text-gray text-df">{{item.create_time}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view style="height:200rpx"></view>
+<view class="cu-bar bg-white tabbar border shop" style="bottom:0rpx; position:fixed;width:100%;border-top: 2rpx solid rgba(0, 0, 0, 0.1);">
+    <button class="action bg-white" openType="contact" style="width:216rpx">
+        <view class="cuIcon-service text-red"></view> 投诉
+  </button>
+    <!-- <view bindtap="call" class="action bg-ox submit text-white" data-phone="{{detail.phone}}">电话咨询</view> -->
+</view>

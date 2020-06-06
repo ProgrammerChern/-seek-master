@@ -1,0 +1,105 @@
+<view class="me">
+    <view bindtap="login" class="userinfo" wx:if="{{nickName}}">
+        <view class="userinfo-avatar">
+            <image src="{{avatarUrl}}"></image>
+        </view>
+        <button style="background:none; color:#fff;"> {{nickName}}</button>
+    </view>
+    <view class="userinfo" wx:else>
+        <view class="userinfo-avatar">
+            <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <open-data type="userNickName"></open-data>
+        <view class="text-df" wx:if="{{uid}}">（uid:{{uid}}）</view>
+    </view>
+</view>
+<view class="box  bg-white  padding-top-xs padding-bottom-xs" style="width:100%;margin-top:2rpx;">
+    <view class="cu-bar tabbar">
+        <view bindtap="card" class="action" data-status="0">
+            <view class="cuIcon-cu-image">
+                <text class="cuIcon-ticket text-black"></text>
+            </view>
+            <view class="text-black margin-top-sm">优惠券</view>
+        </view>
+        <view bindtap="suggest" class="action" data-status="2">
+            <view class="cuIcon-cu-image">
+                <text class="cuIcon-refund text-black"></text>
+            </view>
+            <view class="text-black margin-top-sm">退款记录</view>
+        </view>
+        <view bindtap="address" class="action" data-status="1">
+            <view class="cuIcon-cu-image">
+                <text class="cuIcon-location text-black"></text>
+            </view>
+            <view class="text-black margin-top-sm">我的地址</view>
+        </view>
+        <view bindtap="richtext" class="action" data-status="3">
+            <view class="cuIcon-cu-image">
+                <text class="cuIcon-question text-black"></text>
+            </view>
+            <view class="text-black margin-top-sm">操作指南</view>
+        </view>
+    </view>
+</view>
+<view class="cu-list menu radius margin-top margin-bottom-xl shadow-lg radius">
+    <view bindtap="goStore" class="cu-item arrow" wx:if="{{info.enter_status=='1'&&!store}}">
+        <view class="content">
+            <text class="cuIcon-repair text-black"></text>
+            <text class="text-black margin-left-xs text-df">{{info.enter_title?info.enter_title:'我是师傅'}}</text>
+        </view>
+        <view class="action" wx:if="{{!store}}">
+            <view>立即入驻</view>
+        </view>
+    </view>
+    <view bindtap="goStore" class="cu-item arrow" wx:if="{{info.enter_status=='1'&&store}}">
+        <view class="content">
+            <text class="cuIcon-shop text-black"></text>
+            <text class="text-black margin-left-xs text-df">{{info.enter_title?info.enter_title:'我是师傅'}}</text>
+        </view>
+        <view class="action" wx:if="{{store}}">
+            <view class="text-orange text-sm">管理</view>
+        </view>
+    </view>
+    <view class="cu-item arrow">
+        <view bindtap="shove" class="content">
+            <text class="cuIcon-recharge text-black"></text>
+            <text class="text-black margin-left-xs text-df">推广赚钱</text>
+        </view>
+        <view class="action"></view>
+    </view>
+    <view bindtap="showModal" class="cu-item arrow" data-target="bottomModal">
+        <view class="content">
+            <text class="cuIcon-service text-black"></text>
+            <text class="text-black margin-left-xs text-df">联系客服</text>
+        </view>
+        <view class="action"></view>
+    </view>
+    <view class="cu-item arrow">
+        <button class="cu-btn content" openType="feedback">
+            <text class="cuIcon-write text-black"></text>
+            <text class="text-black margin-left-xs text-df"> 意见反馈</text>
+        </button>
+    </view>
+    <view bindtap="about" class="cu-item arrow">
+        <view class="content">
+            <text class="cuIcon-my text-black"></text>
+            <text class="text-black margin-left-xs text-df">关于平台</text>
+        </view>
+    </view>
+</view>
+    <view class="margin-top padding-lr text-sm text-center" wx:if="{{info.ad_key}}"  bindtap="phoneCall">
+          <!-- 技术支持：电商时代小程序开发 15737719961 -->
+          {{info.ad_key}}
+   </view>
+<modal-box bindtap="hideModal" class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}} ">
+    <view class="cu-dialog">
+        <button class="choose_view solid-bottom" openType="contact">
+            <view class=" text-df padding  bg-white"> 在线客服</view>
+        </button>
+        <view bindtap="phoneCall" class="solid-bottom text-df padding-lg  bg-white">拨打电话</view>
+        <view bindtap="hideModal" class="solid-bottom text-df padding-lg margin-top bg-white">取消</view>
+    </view>
+</modal-box>
+<official-account class="margin-xs radius"></official-account>
+<import src="/pages/template/login.wxml"></import>
+<template is="login" data="{{isShow:isShow}}"></template>

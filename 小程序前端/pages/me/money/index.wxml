@@ -1,0 +1,36 @@
+<scroll-view scrollX class="bg-white nav solid-top margin-bottom-xs">
+    <view class="flex text-center">
+        <view bindtap="tabSelect" class="flex-sub cu-item {{TabCur==0?'text-ox cur':''}}" data-id="0">
+      可用余额
+    </view>
+        <view bindtap="tabSelect" class="flex-sub cu-item {{TabCur==1?'text-ox cur':''}}" data-id="1">
+      冻结余额
+    </view>
+    </view>
+</scroll-view>
+<view wx:if="{{list.length!=0}}" wx:for="{{list}}">
+    <view class="padding-sm bg-white margin-xs ">
+        <view class="flex">
+            <view class="flex-treble text-cut" style="font-size: 22rpx;">{{item.desc}}</view>
+            <view class="text-red text-bold" style="font-size: 26rpx;">{{item.zengjian}}{{item.money}}</view>
+        </view>
+        <view class="flex margin-top-xs">
+            <view class="flex-treble text-cut" style="font-size: 24rpx;">{{item.create_time}}</view>
+            <view style="font-size: 22rpx;"> 余额：{{item.last_money}} </view>
+        </view>
+    </view>
+</view>
+<view class="text-sm text-gray text-center padding" wx:if="{{is_last}}">
+  没有更多了......
+</view>
+<view wx:if="{{list.length==0}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">暂无资金记录</view>
+        <view class="margin-tb text-center">
+            <form bindsubmit="gome" reportSubmit="true">
+                <button class="cu-btn  bg-blue shadow" formType="submit">返回个人中心</button>
+            </form>
+        </view>
+    </view>
+</view>

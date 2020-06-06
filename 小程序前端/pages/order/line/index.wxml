@@ -1,0 +1,39 @@
+<view wx:if="{{logList.length<1}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">师傅没有添加纪录哟~</view>
+        <view class="margin-tb text-center"></view>
+    </view>
+</view>
+<view class="cu-timeline" wx:if="{{logList.length>0}}" wx:for="{{logList}}" wx:key="{{index}}">
+    <view class="cu-item text-green">
+        <view class="cu-card case {{isCard?'no-card':''}}">
+            <view class="cu-item shadow">
+                <view class="image">
+                    <image mode="widthFix" src="{{item.img_path}}" style="max-height:300rpx"></image>
+                    <view class="cu-tag1 bg-white text-green">s{{item.step}}</view>
+                    <view class="cu-tag2 bg-green line-white">{{item.create_time_format}}</view>
+                    <view class="cu-bar bg-shadeBottom">
+                        <text class="text-cut">{{item.line_desc}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{is_del_show==true?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">确定删除吗?</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class="action">
+                <button bindtap="hideModal" class="cu-btn line-green text-green">取消</button>
+                <button bindtap="delItem" class="cu-btn bg-green margin-left">确定</button>
+            </view>
+        </view>
+    </view>
+</view>

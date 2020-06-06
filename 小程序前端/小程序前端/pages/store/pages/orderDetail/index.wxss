@@ -1,0 +1,7 @@
+.icon-titles {
+  width: 6rpx;
+  height: 26rpx;
+  border-radius: 3rpx solod #00c87c;
+  background-color: #00c87c;
+  margin-right: 15rpx;
+}

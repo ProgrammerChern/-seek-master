@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "首页",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "oxtip": "/components/ox-tip/view"
+    }
+}

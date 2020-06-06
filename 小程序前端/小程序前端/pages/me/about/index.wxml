@@ -1,0 +1,15 @@
+<view class="me">
+    <view class="userinfo">
+        <view class="cu-avatar xl round margin-top-xl margin-bottom" style="background-image:url({{detail.logo}});"></view>
+        <view>{{detail.name}}</view>
+    </view>
+</view>
+<view class="cu-list menu no-padding margin-tb  margin-bottom-xl">
+    <view class="cu-item arrow" wx:for="{{list}}">
+        <view bindtap="rich" class="content" data-id="{{item.id}}">
+            <icon class="cuIcon-question text-cyan"></icon>
+            <text class="text-grey margin-left-sm">{{item.title}}</text>
+        </view>
+        <view class="action"></view>
+    </view>
+</view>

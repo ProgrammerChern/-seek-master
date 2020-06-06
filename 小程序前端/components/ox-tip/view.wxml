@@ -1,0 +1,4 @@
+<view bindtap="closeTap" class="tip-prompt" style="position:fixed;left:{{tip.left-300*win}}px;top:10px;z-index:9999" wx:if="{{addShow}}">
+    <text class="tip-prompt_icon">×</text>
+    <view class="tip-prompt_text" style="">点击添加到我的小程序，下次使用更便捷</view>
+</view>

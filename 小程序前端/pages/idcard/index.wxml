@@ -1,0 +1,22 @@
+<view class="nav-list">
+    <view style="height:80rpx"></view>
+    <view bindtap="company" class="nav-li bg-brown margin text-center  radius-lg padding" style="width:100%">
+        <view class="nav-title">
+            <image mode="aspectFit" src="/pages/images/ccert.png" style="width:50rpx;height:60rpx"></image>
+            <text style="position:relative !important;top:-12rpx;left:10rpx;font-size:40rpx">企业认证</text>
+        </view>
+        <view class="margin-top">享受专属蓝色标识</view>
+        <view class="margin-top">供企业/个体户申请</view>
+        <button class="cu-btn round bg-blue margin-top {{shadow?'shadow':''}}" style="background-color:#1296db !important">立即认证</button>
+    </view>
+    <view style="height:80rpx"></view>
+    <navigator class="nav-li bg-orange margin text-center radius-lg padding " hoverClass="none" openType="navigate" style="width:100%" url="/pages/idcard/personal/index">
+        <view class="nav-title">
+            <image mode="aspectFit" src="/pages/images/pcert.png" style="width:50rpx;height:60rpx"></image>
+            <text style="position:relative !important;top:-12rpx;left:10rpx;font-size:40rpx">个人认证</text>
+        </view>
+        <view class="margin-top">享受专属黄色标识</view>
+        <view class="margin-top">供个人申请</view>
+        <button class="cu-btn round bg-blue margin-top {{shadow?'shadow':''}}" style="background-color:#e0620d !important">立即认证</button>
+    </navigator>
+</view>

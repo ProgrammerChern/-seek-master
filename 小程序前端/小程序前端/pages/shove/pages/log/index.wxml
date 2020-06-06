@@ -1,0 +1,26 @@
+<oxnav back="4" id="oxnav" title="推广记录"></oxnav>
+<view id="main">
+    <view class="cu-card article {{isCard?'no-card':''}}">
+        <view class="bg-white" style="margin-top:20rpx" wx:for="{{List}}">
+            <view class="cu-list menu menu-avatar solid-top">
+                <view class="cu-item ">
+                    <view class="cu-avatar radius lg" style="background-image:url({{item.avatar}});"></view>
+                    <view class="content">
+                        <view>
+                            <text class="text-red" wx:if="{{item.is_master==1}}">(师傅)</text>{{item.user_name}}</view>
+                    </view>
+                    <view class="flex-sub  radius text-right">{{item.create_time}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="no-more text-center text-black margin-top margin-bottom" hidden="{{display}}">---到底了哦---</view>
+    <view hidden="{{ophiden}}">
+        <view class="zanwushuju_border">
+            <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+            <view class="zanwushuju_border_title">暂无推广记录</view>
+        </view>
+    </view>
+</view>
+<import src="/pages/template/login.wxml"></import>
+<template is="login" data="{{isShow:isShow}}"></template>

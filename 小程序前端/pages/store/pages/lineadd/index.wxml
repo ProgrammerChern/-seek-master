@@ -1,0 +1,25 @@
+<view class="padding-sm radius">
+    <view hidden="{{TabCur==2?true:false}}">
+        <view class="bg-white">
+            <view class="cu-bar " style=" min-height:80rpx;background:#fff">
+                <view class="action">
+        上传图片：
+      </view>
+                <button bindtap="deleteImg" class="line-green cu-btn sm  margin-right">删除</button>
+            </view>
+            <view class=" margin padding-bottom">
+                <view bindtap="upCover" class="bg-img padding-tb-xl" style="background-image: url('{{coverUrl}}');height: 300rpx;" wx:if="{{coverUrl}}"></view>
+                <view bindtap="upCover" class="padding-xs solids" style="height: 300rpx;" wx:if="{{!coverUrl}}">
+                    <text class="cuIcon-cameraadd" wx:if="{{loading}}"></text>
+                    <text class="icon-loading2 iconfont-spin" wx:else></text>
+                </view>
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <textarea bindinput="inputDataSet" data-name="description" maxlength="-1" placeholder="请填写进度节点描述内容" placeholderClass="placeholder" value="{{description}}"></textarea>
+        </view>
+        <view style="bottom:10rpx;text-align:right;padding-right:50rpx;padding-bottom:20rpx; position:fixed;width:100%">
+            <button bindtap="goadd" class="cu-btn bg-green shadow round" style="width:160rpx;">保存</button>
+        </view>
+    </view>
+</view>

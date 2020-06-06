@@ -1,0 +1,32 @@
+.pg-left {
+    text-align: left;
+}
+
+.cu-list .slprice {
+    color: red!important;
+}
+
+.reason {
+    border: 1px solid rgba(150,150,150,0.3);
+    margin: 40rpx auto;
+    background-color: #fff;
+    text-align: left;
+    height: 200rpx;
+    position: relative;
+}
+.list-footer-cell {
+    font-size: 22rpx;
+    margin-right: 28rpx;
+    width: 100rpx;
+    text-align: center;
+    color: #fc610c;
+    font-weight: 600;
+}
+
+.list-footer-cell image {
+    margin-top: 18rpx;
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 50%;
+    border: .5px solid #eaeaea;
+}

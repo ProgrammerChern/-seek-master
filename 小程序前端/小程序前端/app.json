@@ -1,0 +1,101 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/serviceList/index",
+    "pages/order/index",
+    "pages/order/detail/index",
+    "pages/order/select/index",
+    "pages/order/pay/index",
+    "pages/order/line/index",
+    "pages/goods/index",
+    "pages/goods/detail/index",
+    "pages/goods/order/index",
+    "pages/login/index",
+    "pages/me/index",
+    "pages/me/suggest/index",
+    "pages/me/richtext/index",
+    "pages/me/set/index",
+    "pages/idcard/index",
+    "pages/idcard/personal/index",
+    "pages/idcard/company/index",
+    "pages/me/about/index",
+    "pages/me/address/index",
+    "pages/me/address/detail/index",
+    "pages/me/money/index",
+    "pages/me/take/index",
+    "pages/me/card/index",
+    "pages/store/pages/home/index",
+    "pages/store/pages/order/index",
+    "pages/store/pages/orderDetail/index",
+    "pages/store/pages/ordertaking/index",
+    "pages/store/pages/masterDetail/index",
+    "pages/store/pages/manage/index",
+    "pages/store/pages/admin/index",
+    "pages/store/pages/uxuan/index",
+    "pages/store/pages/appraise/index",
+    "pages/store/pages/offer/index",
+    "pages/store/pages/timeline/index",
+    "pages/store/pages/lineadd/index",
+    "pages/shove/pages/home/index",
+    "pages/shove/pages/ku/index",
+    "pages/shove/pages/userku/index",
+    "pages/shove/pages/rank/index",
+    "pages/shove/pages/yongjin/index",
+    "pages/shove/pages/log/index",
+    "pages/shove/pages/cash/index",
+    "pages/shove/pages/cashlog/index",
+    "pages/need/pages/home/index",
+    "pages/reward/pages/home/index",
+    "pages/company/pages/index/index"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "color": "#C6C6C6",
+    "selectedColor": "#141414",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/images/shouyewdj_btn.png",
+        "selectedIconPath": "pages/images/shouyedj_btn.png"
+      },
+      {
+        "text": "订单",
+        "pagePath": "pages/order/index",
+        "iconPath": "pages/images/dingdan_btn.png",
+        "selectedIconPath": "pages/images/dingdandj_btn.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/me/index",
+        "iconPath": "pages/images/me.png",
+        "selectedIconPath": "pages/images/meselct.png"
+      }
+    ]
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxe42e78861d1688dd",
+    "wx83cc800ccb462506",
+    "wx03fd5f6b0483e6b5",
+    "wx67709fd00b35306e",
+    "wxd0a4f0474d7e1f66",
+    "wx99f30e2f88cd75ed",
+    "wx27122cdcffeda647",
+    "wx019d6bb13e491f50",
+    "wx05fbee368d121ee4",
+    "wx1ed4a8fe823b2e22"
+],
+  "sitemapLocation": "sitemap.json"
+}

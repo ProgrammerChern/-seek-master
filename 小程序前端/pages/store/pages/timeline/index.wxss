@@ -1,0 +1,30 @@
+page {
+    background: #F5F5F5;
+}
+
+.cu-timeline>.cu-item::before {
+    background: #F5F5F5;
+}
+
+.cu-timeline {
+    background-color: #F5F5F5;
+}
+
+.cu-card.case .image .cu-tag1 {
+    position: absolute;
+    left: 10rpx;
+    top: 10rpx;
+    width: 60rpx;
+    padding: 8rpx;
+    border-top-left-radius: 6rpx;
+    border-bottom-left-radius: 6rpx;
+}
+
+.cu-card.case .image .cu-tag2 {
+    position: absolute;
+    left: 68rpx;
+    top: 10rpx;
+    padding: 8rpx;
+    border-top-right-radius: 6rpx;
+    border-bottom-right-radius: 6rpx;
+}

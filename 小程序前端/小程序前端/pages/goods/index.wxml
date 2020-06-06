@@ -1,0 +1,28 @@
+<view class="VerticalBox">
+    <scroll-view scrollWithAnimation scrollY class="VerticalNav nav bg-white" scrollTop="{{VerticalNavTop}}" style="height:calc(100vh)">
+        <view class="cu-item text-green cur">
+      优选服务
+    </view>
+    </scroll-view>
+    <scroll-view scrollWithAnimation scrollY bindscroll="VerticalMain" class="VerticalMain" scrollIntoView="main-{{MainCur}}" style="height:calc(100vh)">
+        <view class="padding-top padding-lr">
+            <view class="cu-bar solid-bottom bg-white">
+                <view class="action">
+                    <text class="cuIcon-title text-green"></text> 优选服务 </view>
+            </view>
+            <view class="cu-list menu-avatar">
+                <view bindtap="goDetail" class="cu-item cur solid-bottom" data-id="{{item.id}}" wx:for="{{ulist}}">
+                    <view class="cu-avatar radius lg" style="background-image:url({{item.img}});"></view>
+                    <view class="content margin-left-lg">
+                        <view>
+                            <text class="text-cut">{{item.goods_name}}</text>
+                        </view>
+                        <view class="text-gray text-sm flex">
+                            <text class="text-cut text-orange"> {{item.price}}元</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

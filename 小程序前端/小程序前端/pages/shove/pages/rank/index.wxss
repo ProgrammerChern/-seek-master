@@ -1,0 +1,9 @@
+.cu-list.menu>.cu-item {
+    position: relative;
+    display: flex;
+    padding: 0 30rpx;
+    min-height: 100rpx;
+    background-color: var(--white);
+    justify-content: flex-end;
+    align-items: center;
+}

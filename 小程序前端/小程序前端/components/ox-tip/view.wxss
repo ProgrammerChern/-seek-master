@@ -1,0 +1,35 @@
+.tip-prompt {
+    width: 400rpx;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    border-radius: 4px;
+}
+
+.tip-prompt::before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+    top: -20px;
+    left: 80%;
+}
+
+.tip-prompt_text {
+    padding: 20rpx;
+}
+
+.tip-prompt_icon {
+    width: 30rpx;
+    height: 30rpx;
+    border: 1px solid #fff;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30rpx;
+    float: right;
+    margin-top: 35rpx;
+    margin-right: 10rpx;
+}

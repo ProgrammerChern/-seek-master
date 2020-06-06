@@ -1,0 +1,23 @@
+<view class="margin-bottom-sm"></view>
+<radio-group class="block">
+    <view class="flex  bg-white p-xs  solid-bottom padding-top-sm padding-bottom-sm mb-sm align-center" wx:for="{{list}}">
+        <view bindtap="selectAddress" class="flex-sub  " data-index="{{index}}" style="flex:0.5;">
+            <view class="cu-form-group sm ">
+                <radio checked="true" wx:if="{{item.default==1}}"></radio>
+                <radio wx:else></radio>
+            </view>
+        </view>
+        <view bindtap="selectAddress" class="flex-treble  " data-index="{{index}}">
+            <view class="text-black ">{{item.address}}{{item.address_detail}}</view>
+            <view class="text-black "> {{item.name}} {{item.phone}} </view>
+        </view>
+        <view bindtap="add" class="flex-sub  text-ox text-center text-lg" data-id="{{item.id}}" style="flex:0.5;">编辑</view>
+    </view>
+</radio-group>
+<view wx:if="{{list.length==0}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">暂无地址</view>
+    </view>
+</view>
+<button bindtap="add" class="cu-btn block bg-ox margin-tb-sm lg text-white" style="position: fixed;left: 10rpx;right:10rpx;bottom: 66rpx;">+添加地址</button>

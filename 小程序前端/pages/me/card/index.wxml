@@ -1,0 +1,52 @@
+<scroll-view scrollX class="bg-white nav">
+    <view class="flex text-center">
+        <view bindtap="tabSelect" class="cu-item flex-sub {{tabid==1?'text-orange cur':''}}" data-id="1">
+      未使用
+    </view>
+        <view bindtap="tabSelect" class="cu-item flex-sub {{tabid==2?'text-orange cur':''}}" data-id="2">
+      已使用
+    </view>
+        <view bindtap="tabSelect" class="cu-item flex-sub {{tabid==3?'text-orange cur':''}}" data-id="3">
+      已过期
+    </view>
+    </view>
+</scroll-view>
+<view class="cu-card article " wx:for="{{list}}">
+    <view class="cu-item shadow padding-top " style="margin-bottom: 0;">
+        <view class="content">
+            <view class="text-center padding-top-sm" style="width:20.68%" wx:if="{{item.status==1}}">
+                <view class="text-xxl">
+                    <text class="text-price text-orange">{{item.jian}}</text>
+                </view>
+                <view class="text-orange ">优惠券</view>
+            </view>
+            <view class="text-center padding-top-sm" style="width:20.68%" wx:else>
+                <view class="text-xxl">
+                    <text class="text-price text-grey">{{item.jian}}</text>
+                </view>
+                <view class="text-grey ">优惠券</view>
+            </view>
+            <view class="padding-left" style="width:53.22%;line-height: 1.8;">
+                <view class="text-black text-bold">{{item.name}}</view>
+                <view class="text-sm text-black">到期时间：{{item.end_time}}</view>
+                <view bindtap="showrule" class="text-xs text-grey" data-id="{{item.id}}">使用规则
+          <text class="cuIcon-unfold lg text-gray" wx:if="{{xianshi!=item.id}}"></text>
+                    <text class="cuIcon-fold lg text-gray" wx:if="{{xianshi==item.id}}"></text>
+                </view>
+                <view class="text-xs text-grey" wx:if="{{xianshi==item.id}}">{{item.rule}}</view>
+            </view>
+            <view class="action padding-top" style="width:26%">
+                <button bindtap="goindex" class="cu-btn round bg-orange text-sm " wx:if="{{item.status==1}}">立即使用</button>
+                <button class="cu-btn round bg-grey text-sm " wx:if="{{item.status==2}}">已使用</button>
+                <button class="cu-btn round bg-grey text-sm " wx:if="{{item.status==3}}">已过期</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{list.length==0}}">
+    <view class="zanwushuju_border">
+        <image class="zanwushuju_border_img" src="/pages/images/none_message.png"></image>
+        <view class="zanwushuju_border_title">暂无优惠券</view>
+        <view class="margin-tb text-center"></view>
+    </view>
+</view>

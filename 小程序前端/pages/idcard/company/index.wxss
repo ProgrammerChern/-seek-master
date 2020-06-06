@@ -1,0 +1,28 @@
+.grid.grid-square view,.grid.grid-square item {
+    margin-right: 0rpx;
+}
+
+form-group input {
+    flex: 1;
+    font-size: 26rpx;
+    color: #555;
+    padding-right: 20rpx;
+}
+
+form-group .title {
+    text-align: justify;
+    padding-right: 30rpx;
+    font-size: 26rpx;
+    position: relative;
+    width: 200rpx;
+    flex: 1;
+}
+
+form-group {
+    background: #fff;
+    padding: 0 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 150rpx;
+}
